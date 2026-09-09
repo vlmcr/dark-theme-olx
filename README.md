@@ -1,15 +1,19 @@
-# OLX Dark Theme
+# Dark theme for olx
 
-A Chrome extension that applies a charcoal dark theme to [OLX.ua](https://www.olx.ua/).
+An unofficial Chrome extension that applies a charcoal dark theme to [olx.ua](https://www.olx.ua/). Not affiliated with OLX.
 
-![OLX.ua search results with the dark theme](docs/screenshot.png)
+![Search results with the dark theme](docs/screenshot.png)
 
 ## Install
 
-1. Open `chrome://extensions`
-2. Turn on **Developer mode**
-3. Click **Load unpacked**
-4. Select this folder
-5. Open [olx.ua](https://www.olx.ua/)
+1. Download [dark-theme-for-olx.zip](https://github.com/vlmcr/dark-theme-olx/releases/latest/download/dark-theme-for-olx.zip)
+2. Unzip the file
+3. Open `chrome://extensions`
+4. Turn on **Developer mode**
+5. Click **Load unpacked**
+6. Select the unzipped folder
+7. Open [olx.ua](https://www.olx.ua/)
 
 Use the toolbar popup to pause or resume the theme.
+
+Chrome does not install random `.crx` files from the web. Load the unzipped folder as above, or clone this repo and load the project folder instead.

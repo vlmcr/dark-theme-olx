@@ -10,7 +10,7 @@ function paint(settings, onOlx) {
 
   if (!onOlx) {
     statusEl.classList.add("is-away");
-    statusText.textContent = "Open OLX.ua to apply the theme";
+    statusText.textContent = "Open olx.ua to apply the theme";
     return;
   }
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate OLX Dark Theme PNG icons without third-party deps."""
+"""Generate dark theme for olx PNG icons without third-party deps."""
 
 from __future__ import annotations
 
