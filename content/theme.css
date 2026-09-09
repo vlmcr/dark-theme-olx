@@ -1,0 +1,122 @@
+/* Consistent charcoal dark theme for OLX.ua.
+   invert(1) covers hashed classes; contrast lift avoids pure black. */
+
+html[data-olx-dark] {
+  color-scheme: light;
+  background-color: #ffffff !important;
+  filter: invert(1) hue-rotate(180deg) contrast(0.82) saturate(0.3);
+  scrollbar-color: #8a8f91 #ecefee;
+}
+
+html[data-olx-dark] body {
+  background-color: #ffffff !important;
+}
+
+/* Restore media so listings stay true-to-life. */
+html[data-olx-dark] img,
+html[data-olx-dark] video,
+html[data-olx-dark] picture,
+html[data-olx-dark] canvas,
+html[data-olx-dark] iframe,
+html[data-olx-dark] embed,
+html[data-olx-dark] object,
+html[data-olx-dark] [style*="background-image"][style*="url("]:not([style*="gradient"]) {
+  filter: invert(1) hue-rotate(180deg) contrast(1.22) !important;
+}
+
+html[data-olx-dark] img[alt*="OLX" i],
+html[data-olx-dark] img[alt*="олх" i],
+html[data-olx-dark] img[src*="logo" i],
+html[data-olx-dark] img[src*="olx" i][src*="svg" i] {
+  filter: none !important;
+}
+
+/* Cancel page invert on chrome only — not on nested menus. */
+html[data-olx-dark] header,
+html[data-olx-dark] [data-olx-accent] {
+  filter: saturate(3.333) contrast(1.22) hue-rotate(180deg) invert(1) !important;
+}
+
+/* Shared slate surfaces — header, actions, menus. */
+html[data-olx-dark] header,
+html[data-olx-dark] [data-olx-accent],
+html[data-olx-dark] [data-olx-panel],
+html[data-olx-dark] header [role="menu"],
+html[data-olx-dark] header [role="listbox"] {
+  background-color: #2a2c2d !important;
+  color: #e4e6e6 !important;
+  border-color: #3d4142 !important;
+  --colorsBackgroundPrimary: #2a2c2d;
+  --colorsBackgroundSecondary: #222425;
+  --colorsBackgroundInverse: #2a2c2d;
+  --colorsBackgroundActionPrimary: #343738;
+  --colorsBackgroundAccent: #343738;
+  --colorsBackgroundAccentSubtle: #343738;
+  --colorsForegroundPrimary: #e4e6e6;
+  --colorsForegroundSecondary: #a8acad;
+  --colorsForegroundAccent: #c4c7c8;
+  --colorsForegroundOnInverse: #e4e6e6;
+  --colorsForegroundOnAccent: #e4e6e6;
+  --colorsForegroundActionPrimary: #e4e6e6;
+  --colorsForegroundPlaceholder: #8b9092;
+  --colorsBorderAccent: #5c6162;
+  --color-background-primary: #2a2c2d;
+  --color-background-inverse: #2a2c2d;
+  --color-background-action-primary: #343738;
+  --color-background-accent: #343738;
+  --color-foreground-primary: #e4e6e6;
+  --color-foreground-secondary: #a8acad;
+  --color-foreground-accent: #c4c7c8;
+  --color-foreground-on-inverse: #e4e6e6;
+  --color-foreground-on-accent: #e4e6e6;
+}
+
+html[data-olx-dark] header img,
+html[data-olx-dark] [data-olx-accent] img,
+html[data-olx-dark] [data-olx-panel] img {
+  filter: none !important;
+}
+
+html[data-olx-dark] [data-olx-panel] a,
+html[data-olx-dark] header [role="menu"] a,
+html[data-olx-dark] header [role="listbox"] a {
+  color: #e4e6e6 !important;
+}
+
+html[data-olx-dark] ::selection {
+  background: #5c6162;
+  color: #e4e6e6;
+}
+
+html[data-olx-dark] input,
+html[data-olx-dark] textarea,
+html[data-olx-dark] select {
+  color-scheme: light;
+}
+
+html[data-olx-dark] input:-webkit-autofill,
+html[data-olx-dark] textarea:-webkit-autofill,
+html[data-olx-dark] select:-webkit-autofill {
+  -webkit-text-fill-color: #1b1e1f;
+  caret-color: #1b1e1f;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+html[data-olx-dark] ::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+html[data-olx-dark] ::-webkit-scrollbar-track {
+  background: #ecefee;
+}
+
+html[data-olx-dark] ::-webkit-scrollbar-thumb {
+  background: #8a8f91;
+  border-radius: 999px;
+  border: 3px solid #ecefee;
+}
+
+html[data-olx-dark] ::-webkit-scrollbar-thumb:hover {
+  background: #6d7274;
+}
