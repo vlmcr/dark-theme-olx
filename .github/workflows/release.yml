@@ -1,0 +1,36 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Package extension
+        run: python3 scripts/package.py
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/dark-theme-for-olx.zip
+          fail_on_unmatched_files: true
+          body: |
+            Unofficial dark theme for olx.ua (not affiliated with OLX).
+
+            ## Install
+            1. Download `dark-theme-for-olx.zip` below
+            2. Unzip it
+            3. Open `chrome://extensions`
+            4. Turn on Developer mode
+            5. Click Load unpacked
+            6. Select the unzipped folder
+            7. Open olx.ua
