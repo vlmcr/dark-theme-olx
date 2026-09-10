@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Dark theme for olx",
   "short_name": "Dark theme",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Unofficial charcoal dark theme for olx.ua — easier on the eyes, day and night.",
   "minimum_chrome_version": "114",
   "icons": {

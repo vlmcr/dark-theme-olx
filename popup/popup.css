@@ -4,9 +4,9 @@
   --line: rgba(255, 255, 255, 0.08);
   --text: #e4e6e6;
   --muted: #a8acad;
-  --accent: #8b9092;
-  --accent-dim: rgba(139, 144, 146, 0.18);
-  --ink: #121414;
+  --accent: #23e5db;
+  --accent-dim: rgba(35, 229, 219, 0.18);
+  --ink: #002f34;
 }
 
 * {

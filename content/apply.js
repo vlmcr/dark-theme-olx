@@ -52,27 +52,82 @@
     );
   }
 
+  function isBrandCyan(color) {
+    const rgb = parseRgb(color);
+    if (!rgb) return false;
+    const [red, green, blue] = rgb;
+    return green >= 180 && blue >= 160 && red <= 80 && green - red >= 80;
+  }
+
+  function isBrandAccent(color) {
+    return isBrandTeal(color) || isBrandCyan(color);
+  }
+
   function isNearWhite(color) {
     const rgb = parseRgb(color);
     if (!rgb) return false;
     return rgb[0] >= 240 && rgb[1] >= 240 && rgb[2] >= 240;
   }
 
+  const AD_IFRAME_RE =
+    /googleads|googlesyndication|doubleclick|googletag|safeframe|adnxs|criteo|taboola|pubmatic|adservice|adsystem/i;
+
+  function isListingCard(node) {
+    const box = node.closest("article, li, [data-cy='l-card']");
+    if (!box) return false;
+    return Boolean(box.querySelector("a[href*='/d/']") && box.querySelector("img"));
+  }
+
+  function markAd(node) {
+    if (!node || node.closest("[data-olx-ad]") || isListingCard(node)) return;
+    const box = node.closest("aside, section, article, ins") || node;
+    box.setAttribute("data-olx-ad", "");
+  }
+
+  function tagAds() {
+    document
+      .querySelectorAll(
+        "iframe, ins.adsbygoogle, [data-google-query-id], [id^='google_ads'], [id*='div-gpt-ad']",
+      )
+      .forEach((node) => {
+        if (node.tagName === "IFRAME") {
+          const src = `${node.src || ""} ${node.id || ""} ${node.name || ""} ${
+            node.getAttribute("data-src") || ""
+          }`;
+          if (!AD_IFRAME_RE.test(src)) return;
+        }
+        markAd(node);
+      });
+
+    document.querySelectorAll("span, p, small").forEach((el) => {
+      if (el.childElementCount || el.closest("[data-olx-ad]")) return;
+      if ((el.textContent || "").trim() !== "Реклама") return;
+      markAd(el.parentElement || el);
+    });
+  }
+
   function tagSurfaces() {
     const enabled = document.documentElement.hasAttribute(ATTR);
     if (!enabled) {
-      document.querySelectorAll("[data-olx-accent], [data-olx-panel]").forEach((node) => {
-        node.removeAttribute("data-olx-accent");
-        node.removeAttribute("data-olx-panel");
-      });
+      document
+        .querySelectorAll("[data-olx-accent], [data-olx-cta], [data-olx-panel], [data-olx-ad]")
+        .forEach((node) => {
+          node.removeAttribute("data-olx-accent");
+          node.removeAttribute("data-olx-cta");
+          node.removeAttribute("data-olx-panel");
+          node.removeAttribute("data-olx-ad");
+        });
       return;
     }
 
     document
       .querySelectorAll("button, a, [role='button'], input[type='submit']")
       .forEach((node) => {
-        if (node.closest("header") || node.hasAttribute("data-olx-accent")) return;
-        if (isBrandTeal(getComputedStyle(node).backgroundColor)) {
+        if (node.hasAttribute("data-olx-accent") || node.hasAttribute("data-olx-cta")) return;
+        if (!isBrandAccent(getComputedStyle(node).backgroundColor)) return;
+        if (node.closest("header")) {
+          node.setAttribute("data-olx-cta", "");
+        } else {
           node.setAttribute("data-olx-accent", "");
         }
       });
@@ -86,6 +141,8 @@
         node.setAttribute("data-olx-panel", "");
       }
     });
+
+    tagAds();
   }
 
   let surfaceFrame = 0;

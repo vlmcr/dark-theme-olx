@@ -1,10 +1,11 @@
-/* Consistent charcoal dark theme for olx.ua.
-   invert(1) covers hashed classes; contrast lift avoids pure black. */
+/* Charcoal dark theme for olx.ua.
+   invert(1) covers hashed classes. Page stays slightly muted like Gmail;
+   product photos get full color; ad blocks keep the gray filter. */
 
 html[data-olx-dark] {
   color-scheme: light;
   background-color: #ffffff !important;
-  filter: invert(1) hue-rotate(180deg) contrast(0.82) saturate(0.3);
+  filter: invert(1) hue-rotate(180deg) contrast(0.82) saturate(0.5);
   scrollbar-color: #8a8f91 #ecefee;
 }
 
@@ -12,7 +13,7 @@ html[data-olx-dark] body {
   background-color: #ffffff !important;
 }
 
-/* Restore media so listings stay true-to-life. */
+/* Listing photos, maps, video: undo invert and restore saturation. */
 html[data-olx-dark] img,
 html[data-olx-dark] video,
 html[data-olx-dark] picture,
@@ -21,7 +22,23 @@ html[data-olx-dark] iframe,
 html[data-olx-dark] embed,
 html[data-olx-dark] object,
 html[data-olx-dark] [style*="background-image"][style*="url("]:not([style*="gradient"]) {
-  filter: invert(1) hue-rotate(180deg) contrast(1.22) !important;
+  filter: invert(1) hue-rotate(180deg) contrast(1.22) saturate(2) !important;
+}
+
+/* Ad units stay desaturated (gray filter). */
+html[data-olx-dark] [data-olx-ad] {
+  filter: saturate(0.6);
+}
+
+html[data-olx-dark] [data-olx-ad] img,
+html[data-olx-dark] [data-olx-ad] video,
+html[data-olx-dark] [data-olx-ad] picture,
+html[data-olx-dark] [data-olx-ad] canvas,
+html[data-olx-dark] [data-olx-ad] iframe,
+html[data-olx-dark] [data-olx-ad] embed,
+html[data-olx-dark] [data-olx-ad] object,
+html[data-olx-dark] [data-olx-ad] [style*="background-image"][style*="url("] {
+  filter: invert(1) hue-rotate(180deg) contrast(1.22) saturate(1) !important;
 }
 
 html[data-olx-dark] img[alt*="OLX" i],
@@ -31,15 +48,14 @@ html[data-olx-dark] img[src*="olx" i][src*="svg" i] {
   filter: none !important;
 }
 
-/* Cancel page invert on chrome only — not on nested menus. */
+/* Cancel page invert on chrome — nested menus stay with the header. */
 html[data-olx-dark] header,
 html[data-olx-dark] [data-olx-accent] {
-  filter: saturate(3.333) contrast(1.22) hue-rotate(180deg) invert(1) !important;
+  filter: saturate(2) contrast(1.22) hue-rotate(180deg) invert(1) !important;
 }
 
-/* Shared slate surfaces — header, actions, menus. */
+/* Shared slate surfaces — header, menus. Accents stay cyan like Gmail's blue. */
 html[data-olx-dark] header,
-html[data-olx-dark] [data-olx-accent],
 html[data-olx-dark] [data-olx-panel],
 html[data-olx-dark] header [role="menu"],
 html[data-olx-dark] header [role="listbox"] {
@@ -49,32 +65,110 @@ html[data-olx-dark] header [role="listbox"] {
   --colorsBackgroundPrimary: #2a2c2d;
   --colorsBackgroundSecondary: #222425;
   --colorsBackgroundInverse: #2a2c2d;
-  --colorsBackgroundActionPrimary: #343738;
-  --colorsBackgroundAccent: #343738;
-  --colorsBackgroundAccentSubtle: #343738;
+  --colorsBackgroundActionPrimary: #23e5db;
+  --colorsBackgroundAccent: #23e5db;
+  --colorsBackgroundAccentSubtle: #1a3a3c;
   --colorsForegroundPrimary: #e4e6e6;
-  --colorsForegroundSecondary: #a8acad;
-  --colorsForegroundAccent: #c4c7c8;
+  --colorsForegroundSecondary: #c8cccd;
+  --colorsForegroundAccent: #23e5db;
   --colorsForegroundOnInverse: #e4e6e6;
-  --colorsForegroundOnAccent: #e4e6e6;
+  --colorsForegroundOnAccent: #002f34;
   --colorsForegroundActionPrimary: #e4e6e6;
-  --colorsForegroundPlaceholder: #8b9092;
-  --colorsBorderAccent: #5c6162;
+  --colorsForegroundPlaceholder: #a8acad;
+  --colorsBorderAccent: #23e5db;
   --color-background-primary: #2a2c2d;
   --color-background-inverse: #2a2c2d;
-  --color-background-action-primary: #343738;
-  --color-background-accent: #343738;
+  --color-background-action-primary: #23e5db;
+  --color-background-accent: #23e5db;
   --color-foreground-primary: #e4e6e6;
-  --color-foreground-secondary: #a8acad;
-  --color-foreground-accent: #c4c7c8;
+  --color-foreground-secondary: #c8cccd;
+  --color-foreground-accent: #23e5db;
   --color-foreground-on-inverse: #e4e6e6;
-  --color-foreground-on-accent: #e4e6e6;
+  --color-foreground-on-accent: #002f34;
+}
+
+html[data-olx-dark] header a,
+html[data-olx-dark] header button,
+html[data-olx-dark] header [role="button"],
+html[data-olx-dark] header span,
+html[data-olx-dark] header p,
+html[data-olx-dark] header li {
+  color: #e4e6e6 !important;
+  opacity: 1;
+}
+
+html[data-olx-dark] header svg {
+  color: #e4e6e6 !important;
+}
+
+html[data-olx-dark] header svg :is(path, circle, ellipse, polygon, polyline, use):not([fill="none"]) {
+  fill: currentColor !important;
+  color: inherit !important;
+}
+
+html[data-olx-dark] path[d="M0 0H20V20H0z"],
+html[data-olx-dark] header svg path[d="M0 0H20V20H0z"] {
+  color: transparent !important;
+}
+
+html[data-olx-dark] header svg [stroke]:not([stroke="none"]) {
+  stroke: currentColor !important;
+}
+
+html[data-olx-dark] [data-olx-accent],
+html[data-olx-dark] [data-olx-cta] {
+  background-color: #23e5db !important;
+  color: #002f34 !important;
+  border-color: #23e5db !important;
+  --colorsBackgroundActionPrimary: #23e5db;
+  --colorsBackgroundAccent: #23e5db;
+  --colorsForegroundPrimary: #002f34;
+  --colorsForegroundSecondary: #002f34;
+  --colorsForegroundOnInverse: #002f34;
+  --colorsForegroundOnAccent: #002f34;
+  --colorsForegroundActionPrimary: #002f34;
+  --color-background-action-primary: #23e5db;
+  --color-background-accent: #23e5db;
+  --color-foreground-primary: #002f34;
+  --color-foreground-on-accent: #002f34;
+  --color-foreground-on-inverse: #002f34;
+}
+
+html[data-olx-dark] [data-olx-accent] *,
+html[data-olx-dark] [data-olx-cta] * {
+  color: inherit !important;
+}
+
+html[data-olx-dark] [data-olx-accent] svg,
+html[data-olx-dark] [data-olx-cta] svg {
+  color: inherit !important;
+}
+
+html[data-olx-dark] [data-olx-accent] svg :is(path, circle, ellipse, polygon, polyline, use):not([fill="none"]),
+html[data-olx-dark] [data-olx-cta] svg :is(path, circle, ellipse, polygon, polyline, use):not([fill="none"]) {
+  fill: currentColor !important;
+  color: inherit !important;
+}
+
+html[data-olx-dark] [data-olx-accent] svg [stroke]:not([stroke="none"]),
+html[data-olx-dark] [data-olx-cta] svg [stroke]:not([stroke="none"]) {
+  stroke: currentColor !important;
 }
 
 html[data-olx-dark] header img,
-html[data-olx-dark] [data-olx-accent] img,
 html[data-olx-dark] [data-olx-panel] img {
   filter: none !important;
+}
+
+/* White glyph icons become the same ink as the button label. */
+html[data-olx-dark] [data-olx-accent] img,
+html[data-olx-dark] [data-olx-cta] img {
+  filter: invert(1) !important;
+}
+
+html[data-olx-dark] [data-olx-accent] [style*="mask"],
+html[data-olx-dark] [data-olx-cta] [style*="mask"] {
+  background-color: currentColor !important;
 }
 
 html[data-olx-dark] [data-olx-panel] a,
@@ -84,8 +178,8 @@ html[data-olx-dark] header [role="listbox"] a {
 }
 
 html[data-olx-dark] ::selection {
-  background: #5c6162;
-  color: #e4e6e6;
+  background: #23e5db;
+  color: #002f34;
 }
 
 html[data-olx-dark] input,

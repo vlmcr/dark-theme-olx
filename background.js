@@ -1,7 +1,7 @@
 const DEFAULTS = { enabled: true };
 
 function badgeColor(enabled) {
-  return enabled ? "#8B9092" : "#5C6162";
+  return enabled ? "#23E5DB" : "#5C6162";
 }
 
 async function syncBadge() {
@@ -10,7 +10,7 @@ async function syncBadge() {
   await chrome.action.setBadgeBackgroundColor({ color: badgeColor(settings.enabled) });
   try {
     await chrome.action.setBadgeTextColor({
-      color: settings.enabled ? "#121414" : "#E4E6E6",
+      color: settings.enabled ? "#002F34" : "#E4E6E6",
     });
   } catch {
     /* older Chromium builds */
